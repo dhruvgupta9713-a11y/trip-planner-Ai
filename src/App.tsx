@@ -34,7 +34,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex flex-col min-h-screen bg-[#060A14] text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
       {/* Brand Navigation & Developer Panel */}
       <Header mockMode={mockMode} onChangeMockMode={setMockMode} />
 
@@ -64,12 +64,12 @@ const App: React.FC = () => {
             <TripHeader trip={itinerary.trip} onReset={reset} />
 
             {/* List of Days */}
-            <div className="space-y-4 px-4">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-900">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <div className="space-y-4 px-2 sm:px-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-300 font-heading">
                   Day-by-Day Itinerary
                 </span>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-slate-400">
                   Click any day to expand or collapse stops
                 </span>
               </div>
@@ -100,8 +100,8 @@ const App: React.FC = () => {
       </main>
 
       {/* footer details */}
-      <footer className="py-6 border-t border-slate-900 text-center text-xs text-slate-550">
-        <p>© {new Date().getFullYear()} VoyageAI. Built for Frontend Engineering Internship. Powered by Google Gemini.</p>
+      <footer className="py-6 border-t border-slate-800/60 text-center text-xs text-slate-400 bg-[#04070F]">
+        <p>© {new Date().getFullYear()} VoyageAI. Bespoke Travel Planner powered by Google Gemini.</p>
       </footer>
     </div>
   );

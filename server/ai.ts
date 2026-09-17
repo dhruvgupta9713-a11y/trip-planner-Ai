@@ -163,31 +163,55 @@ export async function generateItinerary(
     throw new Error("API_KEY_MISSING: The GEMINI_API_KEY environment variable is not configured on the server.");
   }
 
-  try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    // Use gemini-3.6-flash as the default model
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3.6-flash",
-      systemInstruction: SYSTEM_INSTRUCTION,
-      generationConfig: {
-        responseMimeType: "application/json"
+  const candidateModels = [
+    "gemini-3.6-flash",
+    "gemini-3.7-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite"
+  ];
+
+  let lastError: any = null;
+
+  for (const modelName of candidateModels) {
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        console.log(`[AI SERVICE] Trying model ${modelName} (attempt ${attempt})...`);
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: SYSTEM_INSTRUCTION,
+          generationConfig: {
+            responseMimeType: "application/json"
+          }
+        });
+
+        const result = await model.generateContent({
+          contents: [{ role: 'user', parts: [{ text: userPrompt }] }]
+        });
+
+        const response = await result.response;
+        const text = response.text();
+        
+        if (text && text.trim() !== '') {
+          return text;
+        }
+      } catch (error: any) {
+        lastError = error;
+        const errMsg = error.message || '';
+        console.warn(`[AI SERVICE WARN] Model ${modelName} (attempt ${attempt}) failed: ${errMsg}`);
+
+        // If it's transient high demand (503) or rate limit (429), wait and retry
+        if (errMsg.includes('503') || errMsg.includes('high demand') || errMsg.includes('429')) {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+        } else {
+          // If model not found or permanent error, skip remaining retries for this model
+          break;
+        }
       }
-    });
-
-    const result = await model.generateContent({
-      contents: [{ role: 'user', parts: [{ text: userPrompt }] }]
-    });
-
-    const response = await result.response;
-    const text = response.text();
-    
-    if (!text || text.trim() === '') {
-      return '';
     }
-
-    return text;
-  } catch (error: any) {
-    console.error('[AI SERVICE ERROR]:', error);
-    throw new Error(`AI_PROVIDER_ERROR: ${error.message || 'Error occurred during generation'}`);
   }
+
+  console.error('[AI SERVICE ERROR]: All model candidates failed.', lastError);
+  throw new Error(`AI_PROVIDER_ERROR: ${lastError?.message || 'Error occurred during generation'}`);
 }
+

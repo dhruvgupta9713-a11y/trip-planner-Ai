@@ -4,34 +4,75 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-white;
+    @apply bg-[#060A14] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-200 font-sans;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.07) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.04) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
   }
 }
 
-/* Custom modern scrollbar styling */
+/* Custom luxury scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-950;
+  background: #060A14;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-800 rounded-full border-2 border-slate-950 hover:bg-slate-700 transition-colors;
+  background: #1E293B;
+  border-radius: 9999px;
+  border: 2px solid #060A14;
 }
 
-/* Glassmorphism utilities */
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Luxury Glassmorphism & UI utilities */
 .glass-panel {
-  @apply bg-slate-900/60 border border-slate-800 backdrop-blur-md shadow-xl;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.12);
+}
+
+/* Text Gradients */
+.text-gradient-emerald {
+  @apply bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-200 bg-clip-text text-transparent;
+}
+
+.text-gradient-gold {
+  @apply bg-gradient-to-r from-amber-200 via-amber-400 to-orange-300 bg-clip-text text-transparent;
 }
 
 /* Smooth custom slide-in animation */
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -40,5 +81,5 @@
 }
 
 .animate-slide-up {
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

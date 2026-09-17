@@ -33,42 +33,42 @@ export const StopCard: React.FC<StopCardProps> = ({
   const getCategoryStyles = (category: string) => {
     const cat = category.toLowerCase();
     if (cat.includes('food') || cat.includes('din') || cat.includes('eat') || cat.includes('cafe')) {
-      return 'bg-orange-500/10 border-orange-500/20 text-orange-400';
+      return 'bg-amber-500/10 border-amber-500/25 text-amber-300';
     }
     if (cat.includes('sight') || cat.includes('visit') || cat.includes('view') || cat.includes('landmark')) {
-      return 'bg-sky-500/10 border-sky-500/20 text-sky-400';
+      return 'bg-teal-500/10 border-teal-500/25 text-teal-300';
     }
     if (cat.includes('cultur') || cat.includes('art') || cat.includes('museum') || cat.includes('temple') || cat.includes('histor')) {
-      return 'bg-purple-500/10 border-purple-500/20 text-purple-400';
+      return 'bg-purple-500/10 border-purple-500/25 text-purple-300';
     }
     if (cat.includes('advent') || cat.includes('sport') || cat.includes('hike') || cat.includes('nature') || cat.includes('walk')) {
-      return 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400';
+      return 'bg-emerald-500/10 border-emerald-500/25 text-emerald-300';
     }
     if (cat.includes('shop') || cat.includes('market') || cat.includes('mall')) {
-      return 'bg-rose-500/10 border-rose-500/20 text-rose-400';
+      return 'bg-rose-500/10 border-rose-500/25 text-rose-300';
     }
     if (cat.includes('relax') || cat.includes('beach') || cat.includes('spa') || cat.includes('rest')) {
-      return 'bg-teal-500/10 border-teal-500/20 text-teal-400';
+      return 'bg-sky-500/10 border-sky-500/25 text-sky-300';
     }
-    return 'bg-slate-800 border-slate-700 text-slate-400';
+    return 'bg-slate-800 border-slate-700 text-slate-300';
   };
 
   return (
     <div
-      className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl border transition-all duration-300 ${
+      className={`group relative flex flex-col md:flex-row md:items-center justify-between gap-4 p-4.5 rounded-2xl border transition-all duration-300 ${
         stop.completed
-          ? 'bg-slate-900/10 border-emerald-500/25 opacity-55 shadow-inner'
-          : 'bg-slate-850/40 border-slate-800/80 hover:bg-slate-800/40 hover:border-slate-750/80 shadow-md hover:shadow-lg hover:shadow-slate-950/20'
+          ? 'bg-slate-950/40 border-emerald-500/20 opacity-60 shadow-inner'
+          : 'glass-card border-slate-800/80 hover:border-emerald-500/30 shadow-md hover:shadow-xl hover:shadow-emerald-950/10'
       }`}
     >
       <div className="flex items-start gap-3.5 flex-1">
         {/* Complete Checkbox */}
         <button
           onClick={onComplete}
-          className={`mt-1 flex-shrink-0 flex items-center justify-center w-5.5 h-5.5 rounded-full border transition-all active:scale-90 ${
+          className={`mt-1 flex-shrink-0 flex items-center justify-center w-5.5 h-5.5 rounded-full border transition-all active:scale-90 cursor-pointer ${
             stop.completed
-              ? 'bg-emerald-500 border-emerald-500 text-white'
-              : 'bg-transparent border-slate-600 hover:border-indigo-400 text-transparent hover:text-indigo-400/30'
+              ? 'bg-emerald-400 border-emerald-400 text-slate-950 font-bold'
+              : 'bg-slate-900 border-slate-600 hover:border-emerald-400 text-transparent hover:text-emerald-400/40'
           }`}
           aria-label={stop.completed ? "Mark stop as incomplete" : "Mark stop as complete"}
         >
@@ -79,27 +79,27 @@ export const StopCard: React.FC<StopCardProps> = ({
         <div className="space-y-1.5 flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             {/* Start Time Badge */}
-            <span className="text-xs font-mono font-semibold text-indigo-400 flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
+            <span className="text-xs font-mono font-bold text-amber-300 flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-amber-400" />
               {stop.time}
             </span>
 
             {/* Category Tag */}
-            <span className={`text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-md border ${getCategoryStyles(stop.category)}`}>
+            <span className={`text-[10px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-lg border font-heading ${getCategoryStyles(stop.category)}`}>
               {stop.category}
             </span>
 
             {/* Duration Tag */}
-            <span className="text-[10px] font-medium text-slate-500">
+            <span className="text-[10px] font-medium text-slate-400">
               ({formatDuration(stop.durationMinutes)})
             </span>
           </div>
 
-          <h4 className={`text-sm font-bold text-slate-200 tracking-tight leading-snug ${stop.completed ? 'line-through text-slate-500' : ''}`}>
+          <h4 className={`text-base font-bold text-slate-100 tracking-tight leading-snug font-heading ${stop.completed ? 'line-through text-slate-500' : ''}`}>
             {stop.name}
           </h4>
 
-          <p className={`text-xs text-slate-400 leading-relaxed font-light ${stop.completed ? 'text-slate-600' : ''}`}>
+          <p className={`text-xs text-slate-300/80 leading-relaxed font-sans ${stop.completed ? 'text-slate-500' : ''}`}>
             {stop.description}
           </p>
         </div>
@@ -108,11 +108,11 @@ export const StopCard: React.FC<StopCardProps> = ({
       {/* Sorting & Deletion Controls */}
       <div className="flex items-center justify-end border-t border-slate-800/40 pt-3 md:pt-0 md:border-t-0 gap-1.5">
         {/* Reordering Controls */}
-        <div className="flex items-center bg-slate-900/60 rounded-lg p-0.5 border border-slate-800">
+        <div className="flex items-center bg-slate-900/90 rounded-xl p-0.5 border border-slate-800">
           <button
             onClick={onMoveUp}
             disabled={isFirst}
-            className="p-1.5 rounded-md hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent text-slate-400 hover:text-white transition-all disabled:pointer-events-none cursor-pointer"
+            className="p-1.5 rounded-lg hover:bg-slate-800 disabled:opacity-30 text-slate-400 hover:text-emerald-300 transition-all disabled:pointer-events-none cursor-pointer"
             title="Move activity up"
             aria-label="Move activity up"
           >
@@ -122,7 +122,7 @@ export const StopCard: React.FC<StopCardProps> = ({
           <button
             onClick={onMoveDown}
             disabled={isLast}
-            className="p-1.5 rounded-md hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent text-slate-400 hover:text-white transition-all disabled:pointer-events-none cursor-pointer"
+            className="p-1.5 rounded-lg hover:bg-slate-800 disabled:opacity-30 text-slate-400 hover:text-emerald-300 transition-all disabled:pointer-events-none cursor-pointer"
             title="Move activity down"
             aria-label="Move activity down"
           >
@@ -133,7 +133,7 @@ export const StopCard: React.FC<StopCardProps> = ({
         {/* Remove Stop Button */}
         <button
           onClick={onRemove}
-          className="p-2 rounded-lg bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 hover:border-red-500/20 text-slate-400 hover:text-red-400 transition-all active:scale-95 cursor-pointer ml-1"
+          className="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 hover:border-rose-500/30 text-slate-400 hover:text-rose-300 transition-all active:scale-95 cursor-pointer ml-1"
           title="Remove stop"
           aria-label="Remove stop"
         >

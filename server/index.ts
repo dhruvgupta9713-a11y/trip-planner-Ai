@@ -131,6 +131,19 @@ app.post('/api/plan-trip', async (req, res) => {
   }
 });
 
+// Serve production build static files if dist folder exists
+import path from 'path';
+import fs from 'fs';
+
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`[SERVER] Express backend running at http://localhost:${PORT}`);

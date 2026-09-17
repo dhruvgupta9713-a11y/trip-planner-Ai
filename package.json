@@ -8,6 +8,7 @@
     "server": "tsx server/index.ts",
     "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
     "build": "tsc && vite build",
+    "serve:prod": "tsx server/index.ts",
     "preview": "vite preview"
   },
   "dependencies": {

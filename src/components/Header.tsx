@@ -21,18 +21,18 @@ export const Header: React.FC<HeaderProps> = ({ mockMode, onChangeMockMode }) =>
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <header className="sticky top-0 z-40 bg-[#060A14]/80 backdrop-blur-xl border-b border-slate-800/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo and Brand */}
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-gradient-to-tr from-indigo-500 to-sky-400 rounded-xl shadow-lg shadow-indigo-500/20 flex items-center justify-center text-white">
-            <Compass className="w-6 h-6 animate-pulse-slow" />
+          <div className="p-2.5 bg-gradient-to-tr from-emerald-500 via-teal-500 to-amber-400 rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center text-slate-950 font-bold">
+            <Compass className="w-5 h-5 animate-pulse-slow text-slate-950" />
           </div>
           <div>
-            <span className="text-lg font-bold bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-100 via-emerald-200 to-teal-300 bg-clip-text text-transparent font-heading">
               VoyageAI
             </span>
-            <span className="ml-1.5 text-xs px-2 py-0.5 rounded-full bg-slate-800 text-indigo-400 font-semibold border border-indigo-500/20">
+            <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 font-semibold border border-emerald-500/20 tracking-wide">
               v1.0
             </span>
           </div>
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ mockMode, onChangeMockMode }) =>
         {/* Action Controls & Mock Menu */}
         <div className="flex items-center space-x-3">
           {mockMode !== 'NONE' && (
-            <div className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium animate-pulse">
+            <div className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium animate-pulse">
               <AlertTriangle className="w-3.5 h-3.5" />
               <span>Mocking: {mockMode}</span>
             </div>
@@ -51,11 +51,11 @@ export const Header: React.FC<HeaderProps> = ({ mockMode, onChangeMockMode }) =>
             <div className="relative">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center space-x-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all text-xs font-semibold rounded-lg text-slate-200 border border-slate-700"
+                className="flex items-center space-x-2 px-3.5 py-1.5 bg-slate-900/90 hover:bg-slate-800 active:scale-95 transition-all text-xs font-semibold rounded-xl text-slate-200 border border-slate-700/80 hover:border-emerald-500/40 shadow-sm"
                 aria-expanded={isOpen}
                 aria-label="Toggle developer settings"
               >
-                <Settings className={`w-3.5 h-3.5 text-indigo-400 ${isOpen ? 'rotate-90' : ''} transition-transform duration-300`} />
+                <Settings className={`w-3.5 h-3.5 text-emerald-400 ${isOpen ? 'rotate-90' : ''} transition-transform duration-300`} />
                 <span>Dev Settings</span>
               </button>
 

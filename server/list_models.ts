@@ -1,4 +1,3 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -14,13 +13,15 @@ async function listModels() {
     return;
   }
 
-  const genAI = new GoogleGenerativeAI(apiKey);
   try {
-    const list = await genAI.listModels();
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+    const data: any = await res.json();
     console.log('\n--- Supported Models ---');
-    for (const model of list.models) {
-      if (model.supportedGenerationMethods.includes('generateContent')) {
-        console.log(`- ${model.name}`);
+    if (data.models) {
+      for (const model of data.models) {
+        if (model.supportedGenerationMethods?.includes('generateContent')) {
+          console.log(`- ${model.name}`);
+        }
       }
     }
     console.log('------------------------');
