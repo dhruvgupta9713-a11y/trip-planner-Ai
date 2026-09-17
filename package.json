@@ -7,7 +7,7 @@
     "dev": "vite",
     "server": "tsx server/index.ts",
     "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
-    "build": "vite build",
+    "build": "npx vite build",
     "serve:prod": "tsx server/index.ts",
     "preview": "vite preview"
   },
